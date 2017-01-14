@@ -1,0 +1,12 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>chapter_001</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+
+	<parent>
+		<groupId>ru.avelikorechin</groupId>
+		<artifactId>java_education</artifactId>
+		<version>1.0</version>
+	</parent>
+</project>
