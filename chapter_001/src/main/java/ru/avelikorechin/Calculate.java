@@ -6,12 +6,12 @@ package ru.avelikorechin;
 	* @since 14.01.2017
 */
 
-public class Calculate{
+public class Calculate {
 	/**
 	* Конструктор, вывод строки в консоль.
-	* @param arg - arg.
+	* @param args - arg.
 	*/
-	public static void main (String[] args){
+	public static void main(String[] args) {
 		System.out.println("Hello, World!");
 	}
 }
