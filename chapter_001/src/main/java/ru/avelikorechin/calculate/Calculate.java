@@ -1,4 +1,4 @@
-package ru.avelikorechin;
+package ru.avelikorechin.calculate;
 
 /**
 	* Class Calculate — решение задачи части 001, урок 1.

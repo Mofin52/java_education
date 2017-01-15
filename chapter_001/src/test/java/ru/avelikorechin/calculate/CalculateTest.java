@@ -1,4 +1,4 @@
-package ru.avelikorechin;
+package ru.avelikorechin.calculate;
 
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;

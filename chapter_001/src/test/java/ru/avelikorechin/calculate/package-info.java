@@ -1,4 +1,4 @@
 /**
 	* Test methods for Calculator.
 */
-package ru.avelikorechin;
+package ru.avelikorechin.calculate;
