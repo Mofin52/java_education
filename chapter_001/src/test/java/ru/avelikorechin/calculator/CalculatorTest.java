@@ -18,10 +18,11 @@ public class CalculatorTest {
 	public void whenAddOneToOneThenResultIsTwo() {
 		double first = 1.0;
 		double second = 1.0;
+		final double expect = 2.0;
 		Calculator calc = new Calculator();
 		calc.add(first, second);
 		double res  = calc.getResult();
-		assertThat(res, is(first + second));
+		assertThat(res, is(expect));
 	}
 
 	/**
@@ -31,10 +32,11 @@ public class CalculatorTest {
 	public void whenSubstractOneFromTwoThenResultIsOne() {
 		double first = 2.0;
 		double second = 1.0;
+		final double expect = 1.0;
 		Calculator calc = new Calculator();
 		calc.substract(first, second);
 		double res  = calc.getResult();
-		assertThat(res, is(first - second));
+		assertThat(res, is(expect));
 	}
 
 	/**
@@ -44,10 +46,11 @@ public class CalculatorTest {
 	public void whenMultiplyTwoOnTwoThenResultIsFour() {
 		double first = 2.0;
 		double second = 2.0;
+		final double expect = 4; //result of 2 multiplied by 2
 		Calculator calc = new Calculator();
 		calc.multiply(first, second);
 		double res  = calc.getResult();
-		assertThat(res, is(first * second));
+		assertThat(res, is(expect));
 	}
 
 	/**
@@ -57,10 +60,11 @@ public class CalculatorTest {
 	public void whenDivideTwoOnTwoThenResultIsOne() {
 		double first = 2.0;
 		double second = 2.0;
+		final double expect = 1.0;
 		Calculator calc = new Calculator();
 		calc.div(first, second);
 		double res  = calc.getResult();
-		assertThat(res, is(first / second));
+		assertThat(res, is(expect));
 	}
 
 }
