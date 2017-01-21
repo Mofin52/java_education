@@ -45,4 +45,21 @@ public class Turn {
 			}
 		}
 	}
+	/**
+		* Method turns square array 90 degrees.
+		* @param arr - input array
+		* @return Turned 90 degrees array
+	*/
+	public int[][] turnArray90Degrees(int[][] arr) {
+		for (int i = 0; i < (arr.length / 2); i++) {
+			for (int j = i; j < arr.length - (i + 1); j++) {
+				int excluded = arr[i][j];
+				arr[i][j] = arr[arr.length - (j + 1)][i];
+				arr[arr.length - (j + 1)][i] = arr[arr.length - (i + 1)][arr.length - (j + 1)];
+				arr[arr.length - (i + 1)][arr.length - (j + 1)] = arr[j][arr.length - (i + 1)];
+				arr[j][arr.length - (i + 1)] = excluded;
+			}
+		}
+		return arr;
+	}
 }
