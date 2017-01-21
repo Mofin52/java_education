@@ -44,4 +44,27 @@ public class TurnTest {
 		int[] res = execute.back(arr);
 		assertThat(res, is(expect));
 	}
+	/**
+		* Test bubbleSort method with unsorted array.
+	*/
+	@Test
+	public void whenSetUnsortedArrayThenReturnsSortedArray() {
+		final int[] arr  = new int[]{4, 6, 1, 9, 14, 2};
+		final int[] expect = new int[]{1, 2, 4, 6, 9, 14};
+		final Turn execute  = new Turn();
+		int[] res = execute.bubbleSort(arr);
+		assertThat(res, is(expect));
+	}
+	/**
+		* Test bubbleSort method with sorted array.
+	*/
+	@Test
+	public void whenSetUnsortedArrayThenReturnsTheSame() {
+		final int[] arr  = new int[]{1, 2, 3, 4, 5};
+		final int[] expect = new int[]{1, 2, 3, 4, 5};
+		final Turn execute  = new Turn();
+		int[] res = execute.bubbleSort(arr);
+		assertThat(res, is(expect));
+	}
+
 }
