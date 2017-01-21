@@ -13,7 +13,6 @@ public class Turn {
 		* @return Turned backwards array
 	*/
 	public int[] back(int[] arr) {
-		int operations = (arr.length % 2 == 0) ? (arr.length / 2) : ((arr.length / 2) - 1);
 		for (int i = 0; i < (arr.length / 2); i++) {
 				int excluded = arr[i];
 				arr[i] = arr[arr.length - (i + 1)];
