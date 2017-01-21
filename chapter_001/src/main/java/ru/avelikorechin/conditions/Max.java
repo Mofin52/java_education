@@ -26,7 +26,6 @@ public class Max {
 	*/
 	public int max(int first, int second, int third) {
 		int maxOfFirstTwo = max(first, second);
-		int maxOfSecondTwo = max(second, third);
-		return max(maxOfFirstTwo, maxOfSecondTwo);
+		return max(maxOfFirstTwo, third);
 	}
 }
