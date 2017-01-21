@@ -30,10 +30,8 @@ public class Paint {
 					line.append(block);
 				}
 			}
-			do {
-				line.append("\n");
-				piramid.append(line);
-			} while (false);
+			line.append("\n");
+			piramid.append(line);
 		}
 		String result = piramid.toString();
 		return result;
