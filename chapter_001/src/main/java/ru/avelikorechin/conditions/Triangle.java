@@ -43,8 +43,7 @@ public class Triangle {
 			double bToC = this.b.distanceTo(this.c);
 			double cToA = this.c.distanceTo(this.a);
 			double halfPer = (aToB + bToC + cToA) / 2;
-			double area = Math.sqrt(halfPer * (halfPer - aToB) * (halfPer - bToC) * (halfPer - cToA));
-			return area;
+			return Math.sqrt(halfPer * (halfPer - aToB) * (halfPer - bToC) * (halfPer - cToA));
 		} else {
 			return 0;
 		}
@@ -58,7 +57,7 @@ public class Triangle {
 		boolean result = false;
 
 		if (this.a.distanceTo(this.b)  < this.b.distanceTo(this.c)  + this.c.distanceTo(this.a) && this.b.distanceTo(this.c) < this.c.distanceTo(this.a) + this.a.distanceTo(this.b) && this.c.distanceTo(this.a) < this.a.distanceTo(this.b) + this.b.distanceTo(this.c)) {
-			result = true;
+			return true;
 		}
 
 		return result;
