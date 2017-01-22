@@ -1,5 +1,5 @@
 package ru.avelikorechin.arrays;
-
+import java.util.Arrays;
 /**
 	* Arrays turning methods.
 	* @author Alexander Velikorechin
@@ -61,5 +61,25 @@ public class Turn {
 			}
 		}
 		return arr;
+	}
+	/**
+		* Method leaves only unique elements of given array.
+		* @param arr — input array
+		* @return Array with unique elements
+	*/
+	public String[] clearArrayFromCopies(String[] arr) {
+		int newLength = arr.length;
+		for (int i = 1; i < newLength; i++) {
+			for (int j = 0; j < i; j++) {
+				if (arr[i] == arr[j]) {
+					String excluded = arr[i];
+					arr[i] = arr[i + 1];
+					arr[i + 1] = excluded;
+					i--;
+					newLength--;
+				}
+			}
+		}
+		return Arrays.copyOf(arr, newLength);
 	}
 }

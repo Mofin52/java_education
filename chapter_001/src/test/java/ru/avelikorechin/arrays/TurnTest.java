@@ -101,4 +101,16 @@ public class TurnTest {
 		int[][] res = execute.turnArray90Degrees(arr);
 		assertThat(res, is(expect));
 	}
+
+	/**
+		* Test of cleaning arrays from dublicates.
+	*/
+	@Test
+	public void whenSetUniqueArrayThenClearsIt() {
+		final String[] arr  = new String[]{"Привет", "Привет", "Мир", "Мир"};
+		final String[] expect = new String[]{"Привет", "Мир"};
+		final Turn execute  = new Turn();
+		String[] res = execute.clearArrayFromCopies(arr);
+		assertThat(res, is(expect));
+	}
 }
