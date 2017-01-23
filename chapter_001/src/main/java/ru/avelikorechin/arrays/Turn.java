@@ -34,14 +34,10 @@ public class Turn {
 					arr[i] = arr[i + 1];
 					arr[i + 1] = excluded;
 					count++;
-				} else {
-					continue;
 				}
 			}
 			if (count == 0) {
 				return arr;
-			} else {
-				continue;
 			}
 		}
 	}
