@@ -67,7 +67,7 @@ public class Turn {
 		int newLength = arr.length;
 		for (int i = 1; i < newLength; i++) {
 			for (int j = 0; j < i; j++) {
-				if (arr[i] == arr[j]) {
+				if (arr[i].equals(arr[j])) {
 					String excluded = arr[i];
 					arr[i] = arr[i + 1];
 					arr[i + 1] = excluded;
