@@ -16,10 +16,12 @@ public class JoinSortedArrays {
 	public int[] joinArrays(int[] first, int[] second) {
 		int[] goalArray = new int[first.length + second.length];
 		int minLength = first.length <= second.length ? first.length : second.length;
+
+
 		// filling goalArray comparing elements of smaller array with the elements of the same index in bigger
 		for (int i = 0; i < minLength - 1;) { // i increment should be in the inner loop
 			for (int j = 0; j < minLength; j++) {
-				if (first[j] > second[j]) {
+				if (first[j] >= second[j]) {
 					goalArray[i] = second[j];
 					goalArray[i + 1] = first[j];
 				} else {

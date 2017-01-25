@@ -37,4 +37,30 @@ public class JoinSortedArraysTest {
 		assertThat(res, is(expect));
 	}
 
+	/**
+		* Test joinArrays method with 2 similar arrays.
+	*/
+	@Test
+	public void whenJoinTwoSimilarArraysThenReturnsSortedArrays() {
+		final int[] first = {1, 2, 3};
+		final int[] second = {1, 2, 3};
+		final int[] expect = {1, 1, 2, 2, 3, 3};
+		final JoinSortedArrays joiner = new JoinSortedArrays();
+		int[] res = joiner.joinArrays(first, second);
+		assertThat(res, is(expect));
+	}
+
+	/**
+		* Test joinArrays method with 2 consequent arrays.
+	*/
+	@Test
+	public void whenJoinTwoConsequentArraysThenReturnsSortedArrays() {
+		final int[] first = {1, 2, 3};
+		final int[] second = {4, 5, 6};
+		final int[] expect = {1, 2, 3, 4, 5, 6};
+		final JoinSortedArrays joiner = new JoinSortedArrays();
+		int[] res = joiner.joinArrays(first, second);
+		assertThat(res, is(expect));
+	}
+
 }
