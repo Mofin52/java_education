@@ -63,4 +63,17 @@ public class JoinSortedArraysTest {
 		assertThat(res, is(expect));
 	}
 
+	/**
+		* Test joinArrays method with 2 unconsequent arrays.
+	*/
+	@Test
+	public void whenJoinTwoUnconsequentArraysThenReturnsSortedArrays() {
+		final int[] first = {1, 2, 14};
+		final int[] second = {3, 8, 10};
+		final int[] expect = {1, 2, 3, 8, 10, 14};
+		final JoinSortedArrays joiner = new JoinSortedArrays();
+		int[] res = joiner.joinArrays(first, second);
+		assertThat(res, is(expect));
+	}
+
 }

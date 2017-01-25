@@ -16,19 +16,35 @@ public class JoinSortedArrays {
 	public int[] joinArrays(int[] first, int[] second) {
 		int[] goalArray = new int[first.length + second.length];
 		int minLength = first.length <= second.length ? first.length : second.length;
-
-
+		int countFirst = 0;
+		int countSecond = 0;
 		// filling goalArray comparing elements of smaller array with the elements of the same index in bigger
-		for (int i = 0; i < minLength - 1;) { // i increment should be in the inner loop
-			for (int j = 0; j < minLength; j++) {
-				if (first[j] >= second[j]) {
-					goalArray[i] = second[j];
-					goalArray[i + 1] = first[j];
-				} else {
-					goalArray[i] = first[j];
-					goalArray[i + 1] = second[j];
+		for (int i = 0; i < goalArray.length;) { // i increment should be in the inner loop
+			for (int j = 0; j < goalArray.length; j++) {
+				i++;
+				// Adding values that was bigger that their pairs to the end of Array when made the main iteration 
+				if (countSecond == minLength || countFirst == minLength) {
+					if (countFirst > countSecond) {
+						for (int k = countSecond; k < second.length; k++) {
+							goalArray[minLength + countSecond] = second[countSecond];
+							countSecond++;
+						}
+					} else {
+						for (int k = countFirst; k < first.length; k++) {
+							goalArray[minLength + countFirst] = first[countFirst];
+							countFirst++;
+						}
+					}
+					break;
 				}
-				i += 2;
+				// Comparing two arrays and adding smaller values to the goalArray
+				if (first[countFirst] < second[countSecond]) {
+					goalArray[i - 1] = first[countFirst];
+					countFirst++;
+				} else {
+					goalArray[i - 1] = second[countSecond];
+					countSecond++;
+				}
 			}
 		}
 		// if one array is bigger than other, filling the rest of goalArray with end elements of bigger one
