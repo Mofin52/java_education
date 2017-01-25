@@ -22,7 +22,7 @@ public class JoinSortedArrays {
 		for (int i = 0; i < goalArray.length;) { // i increment should be in the inner loop
 			for (int j = 0; j < goalArray.length; j++) {
 				i++;
-				// Adding values that was bigger that their pairs to the end of Array when made the main iteration 
+				// Adding values that was bigger that their pairs to the end of Array when made the main iteration
 				if (countSecond == minLength || countFirst == minLength) {
 					if (countFirst > countSecond) {
 						for (int k = countSecond; k < second.length; k++) {
@@ -47,18 +47,6 @@ public class JoinSortedArrays {
 				}
 			}
 		}
-		// if one array is bigger than other, filling the rest of goalArray with end elements of bigger one
-		if (first.length != second.length) {
-			int[] biggerArray = first.length > second.length ? first : second;
-			int lengthDifference = Math.abs(first.length - second.length);
-			for (int i = goalArray.length - lengthDifference; i < goalArray.length;) { // i increment should be in the inner loop
-				for (int j = biggerArray.length - lengthDifference; j < biggerArray.length; j++) {
-					goalArray[i] = biggerArray[j];
-					i++;
-				}
-			}
-		}
-
 		return goalArray;
 	}
 }
