@@ -12,4 +12,6 @@ public interface Input {
      * @return answer of user
      */
     String ask(String question);
+
+    String showMenu();
 }

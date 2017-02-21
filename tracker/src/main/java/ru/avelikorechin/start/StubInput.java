@@ -29,4 +29,6 @@ public class StubInput implements Input {
     public String ask(String question) {
         return this.answers[position++];
     }
+
+    public String showMenu() {return ask("Ваш выбор:");}
 }

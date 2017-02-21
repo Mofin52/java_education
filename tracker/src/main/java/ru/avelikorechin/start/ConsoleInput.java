@@ -39,7 +39,7 @@ public class ConsoleInput implements Input {
      * Show console menu.
      * @return selected option
      */
-    public int showMenu() {
+    public String showMenu() {
         String[] menu = {
                 "1 - Добавить заявку",
                 "2 - Найти заявку по ID",
@@ -53,9 +53,9 @@ public class ConsoleInput implements Input {
         for (String option : menu) {
             System.out.println(option);
         }
-        int answer = -1;
-        while (answer < 0 || answer > Tracker.FINDBYNAME) {
-            answer = this.askMenu();
+        String answer = "";
+        while (answer.equals("")) {
+            answer = this.ask("Ваш выбор: ");
         }
         return answer;
     }
