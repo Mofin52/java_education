@@ -1,5 +1,6 @@
 package ru.avelikorechin.start;
 
+import com.google.common.base.Joiner;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -36,10 +37,15 @@ public class StartUITest {
         ui.performAction(ui.getInput().ask("Foo"));
         ui.getTracker().findByName("Test1").setId("000");
         ui.getTracker().findByName("Test1").setCreate(newCreate);
+        String expected = Joiner.on(" ").join(
+                "ID: 000",
+                "Название: Test1",
+                "Описание: Test2",
+                "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(String.format("ID: 000 Название: Test1 Описание: Test2 Дата создания: 123456%s", System.getProperty("line.separator"))));
+        assertThat(out.toString(), is(expected));
     }
 
     /**
@@ -52,10 +58,16 @@ public class StartUITest {
         ui.performAction(ui.getInput().ask("Foo"));
         ui.getTracker().findByName("Test1").setId("000");
         ui.getTracker().findByName("Test3").setId("111");
+        String expected = Joiner.on(" ").join(
+                "ID: 000",
+                "Название: Test1",
+                "Описание: Test2" + System.getProperty("line.separator") + "ID: 111",
+                "Название: Test3",
+                "Описание: Test4" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(String.format("ID: 000 Название: Test1 Описание: Test2%sID: 111 Название: Test3 Описание: Test4%s", System.getProperty("line.separator"), System.getProperty("line.separator"))));
+        assertThat(out.toString(), is(expected));
     }
 
     /**
@@ -93,10 +105,15 @@ public class StartUITest {
         ui.performAction(ui.getInput().ask("Foo"));
         ui.getTracker().findByName("Test1").setId("000");
         ui.getTracker().findByName("Test1").setCreate(newCreate);
+        String expected = Joiner.on(" ").join(
+                "ID: 000",
+                "Название: Test1",
+                "Описание: Test2",
+                "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(String.format("ID: 000 Название: Test1 Описание: Test2 Дата создания: 123456%s", System.getProperty("line.separator"))));
+        assertThat(out.toString(), is(expected));
     }
 
     /**
