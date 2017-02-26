@@ -82,14 +82,14 @@ public class StartUI {
 
             case FINDBYID:
                 result = this.tracker.findById(input.ask("ID заявки: "));
-                System.out.println("ID: " + result.getId() + " Название: " + result.getName() + " Описание: " + result.getDescription() + " Дата создания: " + result.getCreate());
+                System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
                 break;
 
             case FINDALL:
                 Item[] allItems = this.tracker.findAll();
                 for (Item item : allItems) {
                     if (item != null) {
-                        System.out.println("ID: " + item.getId() + " Название: " + item.getName() + " Описание: " + item.getDescription());
+                        System.out.printf("ID: %s Название: %s Описание: %s%n", item.getId(), item.getName(), item.getDescription());
                     }
                 }
                 break;
@@ -108,7 +108,7 @@ public class StartUI {
 
             case FINDBYNAME:
                 result = this.tracker.findByName(input.ask("Название заявки: "));
-                System.out.println("ID: " + result.getId() + " Название: " + result.getName() + " Описание: " + result.getDescription() + " Дата создания: " + result.getCreate());
+                System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
                 break;
 
             case EXIT:
