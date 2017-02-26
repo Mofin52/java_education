@@ -130,4 +130,20 @@ public class StartUI {
         Input input = new ConsoleInput();
         new StartUI(input).init();
     }
+
+    /**
+     * Method to return inner tracker.
+     * @return tracker of current ui
+     */
+    public Tracker getTracker() {
+        return this.tracker;
+    }
+
+    /**
+     * Method to return inner input field.
+     * @return input of object
+     */
+    public Input getInput() {
+        return this.input;
+    }
 }

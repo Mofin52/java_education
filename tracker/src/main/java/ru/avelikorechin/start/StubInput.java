@@ -27,8 +27,15 @@ public class StubInput implements Input {
      * @return answer of user
      */
     public String ask(String question) {
+        //return position < answers.length ? this.answers[position++] : "0";
         return this.answers[position++];
     }
 
-    public String showMenu() {return ask("Ваш выбор:");}
+    /**
+     * Method asks for menu input.
+     * @return selected option
+     */
+    public String showMenu() {
+        return ask("Ваш выбор:");
+    }
 }

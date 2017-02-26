@@ -13,5 +13,9 @@ public interface Input {
      */
     String ask(String question);
 
+    /**
+     * Method shows menu for input.
+     * @return input from console
+     */
     String showMenu();
 }
