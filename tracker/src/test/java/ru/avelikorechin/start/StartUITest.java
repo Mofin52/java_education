@@ -1,7 +1,9 @@
 package ru.avelikorechin.start;
 
 import com.google.common.base.Joiner;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
+import ru.avelikorechin.models.Item;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,14 +19,18 @@ import static org.junit.Assert.assertThat;
  */
 public class StartUITest {
     /**
+     * Constant to use for create date for items.
+     */
+    public static final long CUSTOMCREATE = 123456L;
+    /**
      * Test add item.
      */
     @Test
     public void whenAddItemThenItAppearsInTracker() {
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2"});
-        ui.performAction(ui.getInput().ask("Foo"));
+        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "0"});
+        ui.init();
         final int expectedLength = 1;
-        assertThat(ui.getTracker().findAll().length, is(expectedLength));
+        assertThat(ui.getLinkToTracker().findAll().length, is(expectedLength));
     }
 
     /**
@@ -32,11 +38,9 @@ public class StartUITest {
      */
     @Test
     public void whenTryToFindItemByIdThenShowsIt() {
-        final long newCreate = 123456;
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "2", "000"});
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.getTracker().findByName("Test1").setId("000");
-        ui.getTracker().findByName("Test1").setCreate(newCreate);
+        StartUI ui = setTestUp(new String[] {"2", "000", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().findByName("Test1").setId("000");
         String expected = Joiner.on(" ").join(
                 "ID: 000",
                 "Название: Test1",
@@ -44,8 +48,8 @@ public class StartUITest {
                 "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(expected));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
     }
 
     /**
@@ -53,11 +57,11 @@ public class StartUITest {
      */
     @Test
     public void whenFindAllThenShowsAllItems() {
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "1", "Test3", "Test4", "3"});
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.getTracker().findByName("Test1").setId("000");
-        ui.getTracker().findByName("Test3").setId("111");
+        StartUI ui = setTestUp(new String[] {"3", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().add(new Item("Test3", "Test4", CUSTOMCREATE));
+        ui.getLinkToTracker().findByName("Test1").setId("000");
+        ui.getLinkToTracker().findByName("Test3").setId("111");
         String expected = Joiner.on(" ").join(
                 "ID: 000",
                 "Название: Test1",
@@ -66,8 +70,8 @@ public class StartUITest {
                 "Описание: Test4" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(expected));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
     }
 
     /**
@@ -75,11 +79,11 @@ public class StartUITest {
      */
     @Test
     public void whenEditItemThenUpdatesIt() {
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "4", "NewTest1", "NewTest2", "000"});
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.getTracker().findByName("Test1").setId("000");
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(ui.getTracker().findById("000").getName(), is("NewTest1"));
+        StartUI ui = setTestUp(new String[] {"4", "NewTest1", "NewTest2", "000", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().findByName("Test1").setId("000");
+        ui.init();
+        assertThat(ui.getLinkToTracker().findById("000").getName(), is("NewTest1"));
     }
 
     /**
@@ -87,12 +91,12 @@ public class StartUITest {
      */
     @Test
     public void whenDeleteItemThenItBecomesNull() {
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "1", "Test3", "Test4", "5", "000"});
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.getTracker().findByName("Test3").setId("000");
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertNull(ui.getTracker().findById("000"));
+        StartUI ui = setTestUp(new String[] {"5", "000", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().add(new Item("Test3", "Test4", CUSTOMCREATE));
+        ui.getLinkToTracker().findByName("Test3").setId("000");
+        ui.init();
+        assertNull(ui.getLinkToTracker().findById("000"));
     }
 
     /**
@@ -100,11 +104,9 @@ public class StartUITest {
      */
     @Test
     public void whenFindItemByNameThenShowsIt() {
-        final long newCreate = 123456;
-        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "6", "Test1"});
-        ui.performAction(ui.getInput().ask("Foo"));
-        ui.getTracker().findByName("Test1").setId("000");
-        ui.getTracker().findByName("Test1").setCreate(newCreate);
+        StartUI ui = setTestUp(new String[] {"6", "Test1", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().findByName("Test1").setId("000");
         String expected = Joiner.on(" ").join(
                 "ID: 000",
                 "Название: Test1",
@@ -112,34 +114,8 @@ public class StartUITest {
                 "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(expected));
-    }
-
-    /**
-     * Test close program.
-     */
-    @Test
-    public void whenExitThenShowsByeByeMessage() {
-        final String[] actions = new String[] {"0"};
-        final Input input = new StubInput(actions);
-        final StartUI ui = new StartUI(input);
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        ui.performAction(input.ask("Foo question"));
-        assertThat(out.toString(), is(String.format("Завершаем работу программы%s", System.getProperty("line.separator"))));
-    }
-
-    /**
-     * Test incorrect option choice.
-     */
-    @Test
-    public void whenTypeIncorrectOptionThenAsksForAnotherInput() {
-        StartUI ui = setTestUp(new String[] {"problem"});
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        ui.performAction(ui.getInput().ask("Foo"));
-        assertThat(out.toString(), is(String.format("Выберите другую опцию%s", System.getProperty("line.separator"))));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
     }
 
     /**
