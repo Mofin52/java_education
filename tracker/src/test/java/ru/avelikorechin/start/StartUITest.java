@@ -53,6 +53,20 @@ public class StartUITest {
     }
 
     /**
+     * Test to check that findByID doesn't compare ID with create date.
+     */
+    @Test
+    public void whenFindItemByIDDoesNotSearchViaCreateDate() {
+        StartUI ui = setTestUp(new String[] {"2", "123456", "0"});
+        Item goalItem = new Item("Test1", "Test2", CUSTOMCREATE);
+        Item misc = new Item("Test2", "Test1", CUSTOMCREATE);
+        ui.getLinkToTracker().add(goalItem);
+        ui.getLinkToTracker().add(misc);
+        ui.getLinkToTracker().findByName("Test1").setId("123456");
+        assertThat(ui.getLinkToTracker().findById("123456"), is(goalItem));
+    }
+
+    /**
      * Test find all items.
      */
     @Test
@@ -72,6 +86,18 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         ui.init();
         assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+
+    /**
+     * Test to check are all of the tracker items shown.
+     */
+    @Test
+    public void whenFindAllObjectsInTrackerThenReturnsAll() {
+        StartUI ui = setTestUp(new String[] {"3", "0"});
+        ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
+        ui.getLinkToTracker().add(new Item("Test3", "Test4", CUSTOMCREATE));
+        final int expected = 2;
+        assertThat(ui.getLinkToTracker().findAll().length, is(expected));
     }
 
     /**
@@ -116,6 +142,19 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         ui.init();
         assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+
+    /**
+     * Test to check that if we search unique name tracker doesn't search in items description.
+     */
+    @Test
+    public void whenFindItemByNameThenDoesNotCheckItsDescription() {
+        StartUI ui = setTestUp(new String[] {"6", "Test1", "0"});
+        Item firstToAdd = new Item("Test1", "Test2", CUSTOMCREATE);
+        Item secondToAdd = new Item("Test2", "Test1", CUSTOMCREATE);
+        ui.getLinkToTracker().add(firstToAdd);
+        ui.getLinkToTracker().add(secondToAdd);
+        assertThat(ui.getLinkToTracker().findByName(firstToAdd.getName()), is(firstToAdd));
     }
 
     /**
