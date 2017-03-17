@@ -121,10 +121,12 @@
                             <ignores>
                                 <ignore>ru.avelikorechin.start.StartUI</ignore>
                                 <ignore>ru.avelikorechin.start.ConsoleInput</ignore>
+                                <ignore>ru.avelikorechin.start.ValidateInput</ignore>
                             </ignores>
                             <excludes>
                                 <exclude>ru/avelikorechin/start/StartUI.class</exclude>
                                 <exclude>ru/avelikorechin/start/ConsoleInput.class</exclude>
+                                <exclude>ru/avelikorechin/start/ValidateInput.class</exclude>
                             </excludes>
                         </instrumentation>
                     </configuration>

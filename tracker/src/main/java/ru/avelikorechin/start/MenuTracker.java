@@ -80,7 +80,13 @@ public class MenuTracker {
      * @param key is option selected by user
      */
     public void performAction(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        try {
+            this.actions[key].execute(this.input, this.tracker);
+        } catch (EmptyTrackerException ete) {
+            System.out.println(ete.getMessage());
+        } catch (NullPointerException npe) {
+            System.out.println("Такой заявки не существует");
+        }
     }
 
     /**
@@ -92,6 +98,18 @@ public class MenuTracker {
                 System.out.println(action.info());
             }
         }
+    }
+
+    /**
+     * Returns possible user answers for menu.
+     * @return int array of possible answers
+     */
+    public int[] getPossibleMenuRange() {
+        int[] result = new int[TRACKERSIZE];
+        for (int i = 0; i < TRACKERSIZE; i++) {
+            result[i] = i;
+        }
+        return result;
     }
 
     /**
@@ -152,6 +170,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            if (tracker.getPosition() == 0) {
+                throw new EmptyTrackerException("В трекере нет заявок");
+            }
             Item result = tracker.findById(input.ask("ID заявки: "));
             System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
         }
@@ -186,6 +207,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            if (tracker.getPosition() == 0) {
+                throw new EmptyTrackerException("В трекере нет заявок");
+            }
             Item[] allItems = tracker.findAll();
             for (Item item : allItems) {
                 if (item != null) {
@@ -225,6 +249,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            if (tracker.getPosition() == 0) {
+                throw new EmptyTrackerException("В трекере нет заявок");
+            }
             String name = input.ask("Новое имя: ");
             String desc = input.ask("Новое описание: ");
             Item updateInfo = new Item(name, desc, System.currentTimeMillis());
@@ -263,6 +290,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            if (tracker.getPosition() == 0) {
+                throw new EmptyTrackerException("В трекере нет заявок");
+            }
             tracker.delete(tracker.findById(input.ask("ID заявки для удаления: ")));
 
         }
@@ -299,6 +329,9 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            if (tracker.getPosition() == 0) {
+                throw new EmptyTrackerException("В трекере нет заявок");
+            }
             Item result = tracker.findByName(input.ask("Название заявки: "));
             System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
         }

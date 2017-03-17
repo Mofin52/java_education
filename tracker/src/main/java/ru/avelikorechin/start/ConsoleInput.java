@@ -27,6 +27,28 @@ public class ConsoleInput implements Input {
     }
 
     /**
+     * Ask method for int values.
+     * @param question to ask
+     * @param range to validate answer
+     * @return answer of user
+     */
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exists = false;
+        for (int value : range) {
+            if (key == value) {
+                exists = true;
+                break;
+            }
+        }
+        if (exists) {
+            return key;
+        } else {
+            throw new MenuOutException("Такой опции не существует");
+        }
+    }
+
+    /**
      * Method for menu manipulation.
      * @return selected option
      */

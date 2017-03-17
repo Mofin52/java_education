@@ -21,7 +21,6 @@ public class StartUI {
     public StartUI(Input input) {
         this.input = input;
     }
-
     /**
      * Initialization for StartUI.
      */
@@ -29,10 +28,11 @@ public class StartUI {
         Tracker tracker = this.linkToTracker;
         MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillActions();
+        int[] range = menu.getPossibleMenuRange();
         int answer;
         do {
             menu.show();
-            answer = Integer.valueOf(input.ask("Ваш выбор: "));
+            answer = input.ask("Ваш выбор: ", range);
             menu.performAction(answer);
         } while (answer != 0);
     }
@@ -43,16 +43,8 @@ public class StartUI {
      */
     public static void main(String[] args) {
         //Input input = new StubInput(new String[]{"create stub task"});
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUI(input).init();
-    }
-
-    /**
-     * Method to return inner input field.
-     * @return input of object
-     */
-    public Input getInput() {
-        return this.input;
     }
 
     /**

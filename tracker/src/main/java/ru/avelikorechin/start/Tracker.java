@@ -91,12 +91,17 @@ public class Tracker {
      */
     public void update(Item updatedItem) {
         String itemID = updatedItem.getId();
+        boolean noSuchElement = true;
         for (Item item : this.items) {
             if (item != null && item.getId().equals(itemID)) {
                 item.setName(updatedItem.getName());
                 item.setDescription(updatedItem.getDescription());
+                noSuchElement = false;
                 break;
             }
+        }
+        if (noSuchElement) {
+            throw new NullPointerException("Такой заявки не существует");
         }
     }
     /** Method finds item and deletes it.
@@ -125,6 +130,14 @@ public class Tracker {
             }
         }
         return result;
+    }
+
+    /**
+     * Getter for position value.
+     * @return current position
+     */
+    public int getPosition() {
+        return this.position;
     }
 
     /**

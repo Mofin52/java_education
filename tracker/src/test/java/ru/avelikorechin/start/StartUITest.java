@@ -22,6 +22,44 @@ public class StartUITest {
      * Constant to use for create date for items.
      */
     public static final long CUSTOMCREATE = 123456L;
+
+    /**
+     * Test incorrect input.
+     */
+    @Test
+    public void whenUserPutsOptionOutOfRangeThenShowsWarning() {
+        StartUI ui = setTestUp(new String[] {"123"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        String expected = "Такой опции не существует";
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+    /**
+     * Test incorrect input.
+     */
+    @Test
+    public void whenUserPutsIncorrectMenuOptionThenShowsWarning() {
+        StartUI ui = setTestUp(new String[] {"Buzz"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "Введите корректные данные";
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+    /**
+     * Test interact with empty tracker.
+     */
+    @Test
+    public void whenTryToFindItemsInEmptyTrackerShowsMessage() {
+        StartUI ui = setTestUp(new String[] {"3", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "В трекере нет заявок";
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+
     /**
      * Test add item.
      */
@@ -47,6 +85,32 @@ public class StartUITest {
                 "Описание: Test2",
                 "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+
+    /**
+     * Test find item that does not exists.
+     */
+    @Test
+    public void whenFindIdThatNotExistsThenShowsCorrectMessage() {
+        StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "2", "Buzz", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "Такой заявки не существует";
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+
+    /**
+     * Test find item by id in empty tracker does not exists.
+     */
+    @Test
+    public void whenTryToFindByIdInEmptyTrackerShowsMessage() {
+        StartUI ui = setTestUp(new String[] {"2", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "В трекере нет заявок";
         System.setOut(new PrintStream(out));
         ui.init();
         assertThat(out.toString(), CoreMatchers.containsString(expected));
@@ -111,6 +175,18 @@ public class StartUITest {
         ui.init();
         assertThat(ui.getLinkToTracker().findById("000").getName(), is("NewTest1"));
     }
+    /**
+     * Test update empty tracker.
+     */
+    @Test
+    public void whenTryToUpdateInEmptyTrackerShowsMessage() {
+        StartUI ui = setTestUp(new String[] {"4", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "В трекере нет заявок";
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
 
     /**
      * Test delete item.
@@ -123,6 +199,18 @@ public class StartUITest {
         ui.getLinkToTracker().findByName("Test3").setId("000");
         ui.init();
         assertNull(ui.getLinkToTracker().findById("000"));
+    }
+    /**
+     * Test delete empty tracker.
+     */
+    @Test
+    public void whenTryToDeleteItemsInEmptyTrackerShowsMessage() {
+        StartUI ui = setTestUp(new String[] {"5", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "В трекере нет заявок";
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
     }
 
     /**
@@ -139,6 +227,18 @@ public class StartUITest {
                 "Описание: Test2",
                 "Дата создания: 123456" + System.getProperty("line.separator"));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        ui.init();
+        assertThat(out.toString(), CoreMatchers.containsString(expected));
+    }
+    /**
+     * Test find by name in empty tracker.
+     */
+    @Test
+    public void whenTryToFindByNameInEmptyTrackerShowsMessage() {
+        StartUI ui = setTestUp(new String[] {"6", "0"});
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String expected = "В трекере нет заявок";
         System.setOut(new PrintStream(out));
         ui.init();
         assertThat(out.toString(), CoreMatchers.containsString(expected));
@@ -164,7 +264,7 @@ public class StartUITest {
      */
     private StartUI setTestUp(String[] answers) {
         final String[] actions = answers;
-        final Input input = new StubInput(actions);
+        final Input input = new StubValidateInput(actions);
         final StartUI ui = new StartUI(input);
         return ui;
     }
