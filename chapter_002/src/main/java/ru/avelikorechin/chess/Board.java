@@ -24,6 +24,15 @@ public class Board {
         this.figures = new Figure[numOfFigures];
     }
 
+    /**
+     * Checks whether figure can move from one cell to another and if yes, does it.
+     * @param source cell to move from
+     * @param dist cell to move to
+     * @return true - move completed, false - move incompleted
+     * @throws ImpossibleMoveException if figure can'f move this way
+     * @throws OccupiedWayException if there is another figure of the figure's way
+     * @throws FigureNotFoundException if there is no figure in 'source' cell
+     */
     public boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException{
         boolean result = false;
 //        Проверить что в заданной ячейки есть фигура. если нет. то выкинуть исключение

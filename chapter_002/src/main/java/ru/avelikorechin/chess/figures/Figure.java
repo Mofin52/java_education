@@ -33,9 +33,11 @@ public abstract class Figure {
         return path;
     }
 
-    public Figure clone(Cell dist) {
-        Figure result = new Figure(dist);
-        // записать ячейку в ячейку новое положение
-        return result;
+    /**
+     * Writes figure to the new cell.
+     * @param dist new cell
+     */
+    public void clone(Cell dist) {
+
     }
 }
