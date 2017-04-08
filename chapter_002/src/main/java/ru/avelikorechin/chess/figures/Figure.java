@@ -32,4 +32,10 @@ public abstract class Figure {
         Cell[] path = new Cell[0];
         return path;
     }
+
+    public Figure clone(Cell dist) {
+        Figure result = new Figure(dist);
+        // записать ячейку в ячейку новое положение
+        return result;
+    }
 }
