@@ -14,14 +14,15 @@ public class Board {
     /**
      * Array to keep all the figures.
      */
-    private Figure[] figures;
-
+    private Figure[][] figures;
+    private int size;
     /**
-     * Constructor to create board.
-     * @param numOfFigures number of figures to keep
+     * Constructor to create default board.
+     * @param size number of figures to keep
      */
-    public Board(int numOfFigures) {
-        this.figures = new Figure[numOfFigures];
+    public Board(int size) {
+        this.size = size;
+        this.figures = new Figure[size][size];
     }
 
     /**

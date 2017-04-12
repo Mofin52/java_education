@@ -12,7 +12,7 @@ public abstract class Figure {
     /**
      * Initial position of figure.
      */
-    final Cell position;
+    private final Cell position;
 
     /**
      * Constructor for figure.
@@ -28,16 +28,11 @@ public abstract class Figure {
      * @return array of cells figure must pass to arrive the destination
      * @throws ImpossibleMoveException if figure cant' go along this way
      */
-    public Cell[] way(Cell dist) throws ImpossibleMoveException {
-        Cell[] path = new Cell[0];
-        return path;
-    }
+     abstract Cell[] way(Cell dist) throws ImpossibleMoveException;
 
     /**
      * Writes figure to the new cell.
      * @param dist new cell
      */
-    public void clone(Cell dist) {
-
-    }
+     abstract void clone(Cell dist);
 }
