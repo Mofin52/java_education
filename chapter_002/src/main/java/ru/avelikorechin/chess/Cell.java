@@ -8,15 +8,8 @@ import ru.avelikorechin.chess.figures.Figure;
  * @since 08.09.2017
  */
 public class Cell {
-    /**
-     * Number of column where figure is placed.
-     */
     private int column;
-    /**
-     * Number of row where figure is placed.
-     */
     private int row;
-    private Figure currentFigure;
 
     /**
      * Constructor of cell.
@@ -24,22 +17,37 @@ public class Cell {
      * @param row to place figure
      */
     public Cell(int column, int row) {
+        this.setColumn(column);
+        this.setRow(row);
+    }
+
+    /**
+     * Returns number of column where figure is placed.
+     */
+    public int getColumn() {
+        return this.column;
+    }
+
+    /**
+     * Sets number of column for figure.
+     * @param column column
+     */
+    public void setColumn(int column) {
         this.column = column;
+    }
+
+    /**
+     * Returns number of row where figure is placed.
+     */
+    public int getRow() {
+        return this.row;
+    }
+
+    /**
+     * Sets number of row for figure.
+     * @param row row
+     */
+    public void setRow(int row) {
         this.row = row;
-    }
-
-    /**
-     * Gets figure from cell.
-     */
-    public Figure getCurrentFigure() {
-        return this.currentFigure;
-    }
-
-    /**
-     * Sets figure on cell.
-     * @param currentFigure figure to set
-     */
-    public void setCurrentFigure(Figure currentFigure) {
-        this.currentFigure = currentFigure;
     }
 }

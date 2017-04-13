@@ -36,14 +36,21 @@ public class Board {
      */
     public boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException{
         boolean result = false;
-
-        if (source.getCurrentFigure().equals(null)) {
+        Figure fig = this.figures[source.getRow()][source.getColumn()];
+        if (fig.equals(null)) {
             throw new FigureNotFoundException();
         }
 
+        Cell[] way = fig.way(dist);
 
+        for (Cell cell : way) {
+            if (this.figures[cell.getRow()][cell.getColumn()] != null) {
+                throw new OccupiedWayException();
+            }
+        }
 
-//        Проверить что в заданной ячейки есть фигура. если нет. то выкинуть исключение
+        fig.clone(dist);
+
 //        Если фигура есть. Проверить может ли она так двигаться. Если нет то упадет исключение
 //        Проверить что полученный путь. не занят фигурами. Если занят выкинуть исключение
 //        Если все отлично. Записать в ячейку новое новое положение Figure figure.clone(Cell dist)

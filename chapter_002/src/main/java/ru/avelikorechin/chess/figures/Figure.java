@@ -28,11 +28,19 @@ public abstract class Figure {
      * @return array of cells figure must pass to arrive the destination
      * @throws ImpossibleMoveException if figure cant' go along this way
      */
-     abstract Cell[] way(Cell dist) throws ImpossibleMoveException;
+     public abstract Cell[] way(Cell dist) throws ImpossibleMoveException;
 
     /**
      * Writes figure to the new cell.
      * @param dist new cell
      */
-     abstract void clone(Cell dist);
+     public abstract void clone(Cell dist);
+
+    /**
+     * Getter for position.
+     * @return position
+     */
+    public Cell getPosition() {
+        return this.position;
+    }
 }
