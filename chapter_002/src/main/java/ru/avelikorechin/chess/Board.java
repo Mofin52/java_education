@@ -36,6 +36,13 @@ public class Board {
      */
     public boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException{
         boolean result = false;
+
+        if (source.getCurrentFigure().equals(null)) {
+            throw new FigureNotFoundException();
+        }
+
+
+
 //        Проверить что в заданной ячейки есть фигура. если нет. то выкинуть исключение
 //        Если фигура есть. Проверить может ли она так двигаться. Если нет то упадет исключение
 //        Проверить что полученный путь. не занят фигурами. Если занят выкинуть исключение

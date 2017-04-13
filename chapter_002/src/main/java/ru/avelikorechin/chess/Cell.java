@@ -1,5 +1,7 @@
 package ru.avelikorechin.chess;
 
+import ru.avelikorechin.chess.figures.Figure;
+
 /**
  * Cell of chess board.
  * @author Alexander Velikorechin
@@ -14,6 +16,7 @@ public class Cell {
      * Number of row where figure is placed.
      */
     private int row;
+    private Figure currentFigure;
 
     /**
      * Constructor of cell.
@@ -23,5 +26,20 @@ public class Cell {
     public Cell(int column, int row) {
         this.column = column;
         this.row = row;
+    }
+
+    /**
+     * Gets figure from cell.
+     */
+    public Figure getCurrentFigure() {
+        return this.currentFigure;
+    }
+
+    /**
+     * Sets figure on cell.
+     * @param currentFigure figure to set
+     */
+    public void setCurrentFigure(Figure currentFigure) {
+        this.currentFigure = currentFigure;
     }
 }
