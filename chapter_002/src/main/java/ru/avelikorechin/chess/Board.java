@@ -3,6 +3,7 @@ package ru.avelikorechin.chess;
 import ru.avelikorechin.chess.exceptions.FigureNotFoundException;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 import ru.avelikorechin.chess.exceptions.OccupiedWayException;
+import ru.avelikorechin.chess.figures.Bishop;
 import ru.avelikorechin.chess.figures.Figure;
 
 /**
@@ -15,14 +16,15 @@ public class Board {
      * Array to keep all the figures.
      */
     private Figure[][] figures;
-    private int size;
+    /**
+     * Size of board.
+     */
+    public static final int SIZE = 8;
     /**
      * Constructor to create default board.
-     * @param size number of figures to keep
      */
-    public Board(int size) {
-        this.size = size;
-        this.figures = new Figure[size][size];
+    public Board() {
+        this.figures = new Figure[SIZE][SIZE];
     }
 
     /**
@@ -34,11 +36,13 @@ public class Board {
      * @throws OccupiedWayException if there is another figure of the figure's way
      * @throws FigureNotFoundException if there is no figure in 'source' cell
      */
-    public boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException{
-        boolean result = false;
-        Figure fig = this.figures[source.getRow()][source.getColumn()];
-        if (fig.equals(null)) {
+    public boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
+        Figure fig;
+
+        if (this.figures[source.getRow()][source.getColumn()] == null) {
             throw new FigureNotFoundException();
+        } else {
+            fig = this.figures[source.getRow()][source.getColumn()];
         }
 
         Cell[] way = fig.way(dist);
@@ -49,11 +53,21 @@ public class Board {
             }
         }
 
-        fig.clone(dist);
+        Figure newFig = fig.clone(dist);
+        this.figures[source.getRow()][source.getColumn()] = null;
+        this.figures[dist.getRow()][dist.getColumn()] = newFig;
+        System.out.println("Передвинули");
+        return true;
+    }
 
-//        Если фигура есть. Проверить может ли она так двигаться. Если нет то упадет исключение
-//        Проверить что полученный путь. не занят фигурами. Если занят выкинуть исключение
-//        Если все отлично. Записать в ячейку новое новое положение Figure figure.clone(Cell dist)
-        return result;
+    private void addFigure(Figure fig) {
+        this.figures[fig.getPosition().getRow()][fig.getPosition().getColumn()] = fig;
+    }
+
+    public static void main(String[] args) {
+        Board board = new Board();
+        board.addFigure(new Bishop(new Cell(0,0)));
+        board.move(new Cell(0,0), new Cell(1,1));
+        board.move(new Cell(1,1), new Cell(3,4));
     }
 }

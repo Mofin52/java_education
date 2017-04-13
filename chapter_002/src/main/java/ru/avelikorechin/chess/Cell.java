@@ -1,14 +1,18 @@
 package ru.avelikorechin.chess;
 
-import ru.avelikorechin.chess.figures.Figure;
-
 /**
  * Cell of chess board.
  * @author Alexander Velikorechin
  * @since 08.09.2017
  */
 public class Cell {
+    /**
+     * Column.
+     */
     private int column;
+    /**
+     * Row.
+     */
     private int row;
 
     /**
@@ -23,6 +27,7 @@ public class Cell {
 
     /**
      * Returns number of column where figure is placed.
+     * @return number of column
      */
     public int getColumn() {
         return this.column;
@@ -38,6 +43,7 @@ public class Cell {
 
     /**
      * Returns number of row where figure is placed.
+     * @return number of row
      */
     public int getRow() {
         return this.row;

@@ -1,5 +1,6 @@
 package ru.avelikorechin.chess.figures;
 
+import ru.avelikorechin.chess.Board;
 import ru.avelikorechin.chess.Cell;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 
@@ -13,7 +14,7 @@ public class Bishop extends Figure {
      * Constructor for Bishop class.
      * @param position position of figure
      */
-    public Bishop (Cell position) {
+    public Bishop(Cell position) {
         super(position);
     }
     /**
@@ -29,9 +30,9 @@ public class Bishop extends Figure {
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
         Cell[] result = new Cell[colChangeAbs];
-        if (rowChangeAbs == colChangeAbs && dist.getColumn() <= 7 && dist.getColumn() > 0 && dist.getRow() <= 7 && dist.getRow() > 0) {
-            for (int i = 1; i < rowChangeAbs; i++) {
-                result[i-1] = new Cell((this.getPosition().getColumn() + i) * (colChange / colChangeAbs),(this.getPosition().getRow() + i) * (rowChange / rowChangeAbs));
+        if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() > 0 && dist.getRow() < Board.SIZE && dist.getRow() > 0) {
+            for (int i = 0; i < rowChangeAbs; i++) {
+                result[i] = new Cell((this.getPosition().getColumn() + i + 1) * (colChange / colChangeAbs), (this.getPosition().getRow() + i + 1) * (rowChange / rowChangeAbs));
             }
         } else {
             throw new ImpossibleMoveException();
@@ -42,9 +43,10 @@ public class Bishop extends Figure {
     /**
      * Writes figure to the new cell.
      * @param dist new cell
+     * @return new Bishop
      */
     @Override
-    public void clone(Cell dist) {
-
+    public Bishop clone(Cell dist) {
+        return new Bishop(dist);
     }
 }

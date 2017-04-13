@@ -33,8 +33,9 @@ public abstract class Figure {
     /**
      * Writes figure to the new cell.
      * @param dist new cell
+     * @return new figure on new cell
      */
-     public abstract void clone(Cell dist);
+     public abstract Figure clone(Cell dist);
 
     /**
      * Getter for position.

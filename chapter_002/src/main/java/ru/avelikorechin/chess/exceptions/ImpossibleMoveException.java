@@ -6,7 +6,10 @@ package ru.avelikorechin.chess.exceptions;
  * @since 08.04.2017
  */
 public class ImpossibleMoveException extends RuntimeException {
+    /**
+     * Constructor.
+     */
     public ImpossibleMoveException() {
-        super("This figure can't move this way");
+        System.out.println("This figure can't move this way");
     }
 }

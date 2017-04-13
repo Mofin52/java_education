@@ -1,10 +1,15 @@
 package ru.avelikorechin.chess.exceptions;
 
 /**
- * Created by Александр on 08.04.2017.
+ * Exception thrown when user tries to make an impossible move.
+ * @author Alexander Velikorechin
+ * @since 08.04.2017
  */
-public class OccupiedWayException extends RuntimeException{
+public class OccupiedWayException extends RuntimeException {
+    /**
+     * Constructor.
+     */
     public OccupiedWayException() {
-        super("There is another figure of the figure's way");
+        System.out.println("There is another figure of the figure's way");
     }
 }
