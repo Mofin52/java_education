@@ -37,7 +37,7 @@ public class King extends Figure {
                 throw new ImpossibleMoveException();
             }
         } else {
-            if (dist.getColumn() >= 0 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getRow() < Board.SIZE && rowChangeAbs != colChangeAbs) {
+            if (dist.getColumn() >= 0 && rowChangeAbs < 2 && colChangeAbs < 2 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getRow() < Board.SIZE && rowChangeAbs != colChangeAbs) {
                 result[0] = new Cell(dist.getRow(), dist.getColumn());
             } else {
                 throw new ImpossibleMoveException();

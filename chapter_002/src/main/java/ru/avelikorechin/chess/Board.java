@@ -12,7 +12,7 @@ import ru.avelikorechin.chess.figures.Figure;
  */
 public class Board {
     /**
-     * Array to keep all the figures.
+     * Array of figures.
      */
     private Figure[][] figures;
     /**
@@ -64,5 +64,13 @@ public class Board {
      */
     public void addFigure(Figure fig) {
         this.figures[fig.getPosition().getRow()][fig.getPosition().getColumn()] = fig;
+    }
+
+    /**
+     * Returns array with all the figures.
+     * @return figures array
+     */
+    public Figure[][] getFigures() {
+        return this.figures;
     }
 }
