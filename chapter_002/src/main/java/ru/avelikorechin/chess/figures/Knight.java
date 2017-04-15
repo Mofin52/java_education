@@ -5,16 +5,16 @@ import ru.avelikorechin.chess.Cell;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 
 /**
- * Class describes Bishop figure logic.
+ * Class describes Knight figure logic.
  * @author Alexander Velikorechin
- * @since 13.04.2017
+ * @since 14.04.2017
  */
-public class Bishop extends Figure {
+public class Knight extends Figure {
     /**
-     * Constructor for Bishop class.
+     * Constructor for Knight class.
      * @param position position of figure
      */
-    public Bishop(Cell position) {
+    public Knight(Cell position) {
         super(position);
     }
     /**
@@ -29,11 +29,9 @@ public class Bishop extends Figure {
         int colChange = dist.getColumn() - this.getPosition().getColumn();
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
-        Cell[] result = new Cell[colChangeAbs];
-        if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() > 0 && dist.getRow() < Board.SIZE && dist.getRow() > 0) {
-            for (int i = 0; i < rowChangeAbs; i++) {
-                result[i] = new Cell((this.getPosition().getRow() + i + 1) * (rowChange / rowChangeAbs), (this.getPosition().getColumn() + i + 1) * (colChange / colChangeAbs));
-            }
+        Cell[] result = new Cell[1];
+        if (rowChangeAbs + colChangeAbs == 3 && dist.getColumn() > 0 && dist.getRow() > 0 && dist.getColumn() < Board.SIZE && dist.getColumn() < Board.SIZE && rowChangeAbs > 0 && colChangeAbs > 0) {
+            result[0] = new Cell(dist.getRow(), dist.getColumn());
         } else {
             throw new ImpossibleMoveException();
         }
@@ -43,10 +41,10 @@ public class Bishop extends Figure {
     /**
      * Writes figure to the new cell.
      * @param dist new cell
-     * @return new Bishop
+     * @return new Knight
      */
     @Override
-    public Bishop clone(Cell dist) {
-        return new Bishop(dist);
+    public Knight clone(Cell dist) {
+        return new Knight(dist);
     }
 }

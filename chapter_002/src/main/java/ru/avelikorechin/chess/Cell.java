@@ -20,7 +20,7 @@ public class Cell {
      * @param column to place figure
      * @param row to place figure
      */
-    public Cell(int column, int row) {
+    public Cell(int row, int column) {
         this.setColumn(column);
         this.setRow(row);
     }

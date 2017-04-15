@@ -5,16 +5,16 @@ import ru.avelikorechin.chess.Cell;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 
 /**
- * Class describes Bishop figure logic.
+ * Class describes Queen figure logic.
  * @author Alexander Velikorechin
  * @since 13.04.2017
  */
-public class Bishop extends Figure {
+public class Queen extends Figure {
     /**
-     * Constructor for Bishop class.
+     * Constructor for Queen class.
      * @param position position of figure
      */
-    public Bishop(Cell position) {
+    public Queen(Cell position) {
         super(position);
     }
     /**
@@ -43,10 +43,10 @@ public class Bishop extends Figure {
     /**
      * Writes figure to the new cell.
      * @param dist new cell
-     * @return new Bishop
+     * @return new Queen
      */
     @Override
-    public Bishop clone(Cell dist) {
-        return new Bishop(dist);
+    public Queen clone(Cell dist) {
+        return new Queen(dist);
     }
 }

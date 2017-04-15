@@ -3,8 +3,7 @@ package ru.avelikorechin.chess;
 import ru.avelikorechin.chess.exceptions.FigureNotFoundException;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 import ru.avelikorechin.chess.exceptions.OccupiedWayException;
-import ru.avelikorechin.chess.figures.Bishop;
-import ru.avelikorechin.chess.figures.Figure;
+import ru.avelikorechin.chess.figures.*;
 
 /**
  * Chess board.
@@ -66,8 +65,8 @@ public class Board {
 
     public static void main(String[] args) {
         Board board = new Board();
-        board.addFigure(new Bishop(new Cell(0,0)));
-        board.move(new Cell(0,0), new Cell(1,1));
-        board.move(new Cell(1,1), new Cell(3,4));
+        board.addFigure(new Pawn(new Cell(0,0)));
+        board.move(new Cell(0,0), new Cell(2,0));
+        board.move(new Cell(2,0), new Cell(2, 1));
     }
 }
