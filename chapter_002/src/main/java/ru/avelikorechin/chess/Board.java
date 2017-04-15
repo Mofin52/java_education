@@ -62,7 +62,7 @@ public class Board {
      * Adds figure to the board.
      * @param fig figure to add
      */
-    private void addFigure(Figure fig) {
+    public void addFigure(Figure fig) {
         this.figures[fig.getPosition().getRow()][fig.getPosition().getColumn()] = fig;
     }
 }
