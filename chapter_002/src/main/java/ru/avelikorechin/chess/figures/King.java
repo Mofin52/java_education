@@ -5,16 +5,16 @@ import ru.avelikorechin.chess.Cell;
 import ru.avelikorechin.chess.exceptions.ImpossibleMoveException;
 
 /**
- * Class describes Knight figure logic.
+ * Class describes King figure logic.
  * @author Alexander Velikorechin
- * @since 14.04.2017
+ * @since 13.04.2017
  */
-public class Knight extends Figure {
+public class King extends Figure {
     /**
-     * Constructor for Knight class.
+     * Constructor for King class.
      * @param position position of figure
      */
-    public Knight(Cell position) {
+    public King(Cell position) {
         super(position);
     }
     /**
@@ -29,12 +29,19 @@ public class Knight extends Figure {
         int colChange = dist.getColumn() - this.getPosition().getColumn();
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
-        final int maxShift = 3;
         Cell[] result = new Cell[1];
-        if (rowChangeAbs + colChangeAbs == maxShift && dist.getColumn() >= 0 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getColumn() < Board.SIZE && rowChangeAbs > 0 && colChangeAbs > 0) {
-            result[0] = new Cell(dist.getRow(), dist.getColumn());
+        if (rowChangeAbs * colChangeAbs != 0) {
+            if (rowChangeAbs == colChangeAbs && rowChangeAbs == 1 && dist.getColumn() < Board.SIZE && dist.getColumn() >= 0 && dist.getRow() < Board.SIZE && dist.getRow() >= 0) {
+                result[0] = new Cell(dist.getRow(), dist.getColumn());
+            } else {
+                throw new ImpossibleMoveException();
+            }
         } else {
-            throw new ImpossibleMoveException();
+            if (dist.getColumn() >= 0 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getRow() < Board.SIZE && rowChangeAbs != colChangeAbs) {
+                result[0] = new Cell(dist.getRow(), dist.getColumn());
+            } else {
+                throw new ImpossibleMoveException();
+            }
         }
         return result;
     }
@@ -42,10 +49,10 @@ public class Knight extends Figure {
     /**
      * Writes figure to the new cell.
      * @param dist new cell
-     * @return new Knight
+     * @return new King
      */
     @Override
-    public Knight clone(Cell dist) {
-        return new Knight(dist);
+    public King clone(Cell dist) {
+        return new King(dist);
     }
 }
