@@ -43,7 +43,7 @@ public class Pawn extends Figure {
         int colChange = dist.getColumn() - this.getPosition().getColumn();
         Cell[] result = new Cell[rowChange];
         if (firstMove) {
-            if(rowChange < 3 && rowChange > 0 && dist.getRow() > 0 && dist.getRow() < Board.SIZE && colChange == 0) {
+            if(rowChange < 3 && rowChange > 0 && dist.getRow() >= 0 && dist.getRow() < Board.SIZE && colChange == 0) {
                 for (int i = 0; i < rowChange; i++) {
                     result[i] = new Cell((this.getPosition().getRow() + i + 1) * (rowChange / rowChange), (this.getPosition().getColumn()));
                 }
@@ -52,7 +52,7 @@ public class Pawn extends Figure {
                 throw new ImpossibleMoveException();
             }
         } else {
-            if(rowChange == 1 && dist.getRow() > 0 && dist.getRow() < Board.SIZE && colChange == 0) {
+            if(rowChange == 1 && dist.getRow() >= 0 && dist.getRow() < Board.SIZE && colChange == 0) {
                 result[0] = new Cell(dist.getRow(), this.getPosition().getColumn());
             } else {
                 throw new ImpossibleMoveException();

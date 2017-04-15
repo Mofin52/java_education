@@ -29,13 +29,29 @@ public class Queen extends Figure {
         int colChange = dist.getColumn() - this.getPosition().getColumn();
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
-        Cell[] result = new Cell[colChangeAbs];
-        if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() > 0 && dist.getRow() < Board.SIZE && dist.getRow() > 0) {
-            for (int i = 0; i < rowChangeAbs; i++) {
-                result[i] = new Cell((this.getPosition().getRow() + i + 1) * (rowChange / rowChangeAbs), (this.getPosition().getColumn() + i + 1) * (colChange / colChangeAbs));
+        Cell[] result = new Cell[rowChangeAbs > colChangeAbs ? rowChangeAbs : colChangeAbs];
+        if (rowChangeAbs * colChangeAbs != 0) {
+            if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() >= 0 && dist.getRow() < Board.SIZE && dist.getRow() >= 0) {
+                for (int i = 0; i < rowChangeAbs; i++) {
+                    result[i] = new Cell(this.getPosition().getRow() + (i + 1) * (rowChange / rowChangeAbs), this.getPosition().getColumn() + (i + 1) * (colChange / colChangeAbs));
+                }
+            } else {
+                throw new ImpossibleMoveException();
             }
         } else {
-            throw new ImpossibleMoveException();
+            if (dist.getColumn() >= 0 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getRow() < Board.SIZE && rowChangeAbs != colChangeAbs) {
+                if (rowChangeAbs == 0) {
+                    for (int i = 0; i < colChangeAbs; i++) {
+                        result[i] = new Cell(this.getPosition().getRow(), (this.getPosition().getColumn() + i + 1) * (colChange / colChangeAbs));
+                    }
+                } else {
+                    for (int i = 0; i < rowChangeAbs; i++) {
+                        result[i] = new Cell((this.getPosition().getRow() + i + 1) * (rowChange / rowChangeAbs), this.getPosition().getColumn());
+                    }
+                }
+            } else {
+                throw new ImpossibleMoveException();
+            }
         }
         return result;
     }

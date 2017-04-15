@@ -30,7 +30,7 @@ public class Knight extends Figure {
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
         Cell[] result = new Cell[1];
-        if (rowChangeAbs + colChangeAbs == 3 && dist.getColumn() > 0 && dist.getRow() > 0 && dist.getColumn() < Board.SIZE && dist.getColumn() < Board.SIZE && rowChangeAbs > 0 && colChangeAbs > 0) {
+        if (rowChangeAbs + colChangeAbs == 3 && dist.getColumn() >= 0 && dist.getRow() >= 0 && dist.getColumn() < Board.SIZE && dist.getColumn() < Board.SIZE && rowChangeAbs > 0 && colChangeAbs > 0) {
             result[0] = new Cell(dist.getRow(), dist.getColumn());
         } else {
             throw new ImpossibleMoveException();

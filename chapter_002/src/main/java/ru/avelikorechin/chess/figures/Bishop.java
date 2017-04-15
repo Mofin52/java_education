@@ -30,9 +30,9 @@ public class Bishop extends Figure {
         int rowChangeAbs = Math.abs(rowChange);
         int colChangeAbs = Math.abs(colChange);
         Cell[] result = new Cell[colChangeAbs];
-        if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() > 0 && dist.getRow() < Board.SIZE && dist.getRow() > 0) {
+        if (rowChangeAbs == colChangeAbs && dist.getColumn() < Board.SIZE && dist.getColumn() >= 0 && dist.getRow() < Board.SIZE && dist.getRow() >= 0) {
             for (int i = 0; i < rowChangeAbs; i++) {
-                result[i] = new Cell((this.getPosition().getRow() + i + 1) * (rowChange / rowChangeAbs), (this.getPosition().getColumn() + i + 1) * (colChange / colChangeAbs));
+                result[i] = new Cell(this.getPosition().getRow() + (i + 1) * (rowChange / rowChangeAbs), this.getPosition().getColumn() + (i + 1) * (colChange / colChangeAbs));
             }
         } else {
             throw new ImpossibleMoveException();

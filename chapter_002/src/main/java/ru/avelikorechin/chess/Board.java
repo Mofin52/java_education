@@ -65,8 +65,10 @@ public class Board {
 
     public static void main(String[] args) {
         Board board = new Board();
-        board.addFigure(new Pawn(new Cell(0,0)));
-        board.move(new Cell(0,0), new Cell(2,0));
-        board.move(new Cell(2,0), new Cell(2, 1));
+        board.addFigure(new Bishop(new Cell(0,0)));
+        board.move(new Cell(0,0), new Cell(7,7));
+        board.move(new Cell(7,7), new Cell(0,0));
+//        board.move(new Cell(7,0), new Cell(0, 7));
+//        board.move(new Cell(0,7), new Cell(1,3));
     }
 }
