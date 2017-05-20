@@ -39,7 +39,8 @@ public class ConvertList {
         int colIndex = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < lines; j++) {
-                result[i][j] = list.get(colIndex++);
+                result[i][j] = list.iterator().next();
+                colIndex++;
                 if (colIndex == list.size()) {
                     break;
                 }
