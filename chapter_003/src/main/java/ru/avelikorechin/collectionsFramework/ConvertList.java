@@ -37,10 +37,10 @@ public class ConvertList {
             lines++;
         }
         int[][] result = new int[rows][lines];
-        Iterator iter = list.iterator();
+        Iterator<Integer> iter = list.iterator();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < lines; j++) {
-                result[i][j] = iter.hasNext() ? (Integer) iter.next() : 0;
+                result[i][j] = iter.hasNext() ? iter.next() : 0;
             }
         }
         return result;
