@@ -1,6 +1,7 @@
 package ru.avelikorechin.collectionsFramework;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,14 +37,10 @@ public class ConvertList {
             lines++;
         }
         int[][] result = new int[rows][lines];
-        int colIndex = 0;
+        Iterator iter = list.iterator();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < lines; j++) {
-                result[i][j] = list.iterator().next();
-                colIndex++;
-                if (colIndex == list.size()) {
-                    break;
-                }
+                result[i][j] = iter.hasNext() ? (Integer) iter.next() : 0;
             }
         }
         return result;
