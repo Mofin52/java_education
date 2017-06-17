@@ -1,5 +1,7 @@
 package ru.avelikorechin.start;
 
+import java.util.ArrayList;
+
 /**
  * Class to validate stub input.
  * @author Alexander Velikorechin
@@ -21,7 +23,7 @@ public class StubValidateInput extends StubInput {
      * @return answer of user
      */
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
             int value = 0;
             try {
                 value = super.ask(question, range);

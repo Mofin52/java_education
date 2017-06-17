@@ -2,6 +2,8 @@ package ru.avelikorechin.start;
 
 import ru.avelikorechin.models.Item;
 
+import java.util.ArrayList;
+
 /**
  * Tracker start class.
  * @author Alexander Velikorechin
@@ -55,7 +57,7 @@ public class MenuTracker {
     /**
      * Available actions.
      */
-    private UserAction[] actions = new UserAction[TRACKERSIZE];
+    private ArrayList<UserAction> actions = new ArrayList<>();
     /**
      * Constructor for MenuTracker class.
      * @param input to use
@@ -70,7 +72,7 @@ public class MenuTracker {
      * Fills class actions field with available options.
      */
     public void fillActions() {
-        this.actions[position++] = new BaseAction("Выйти") {
+        this.actions.add(position++, new BaseAction("Выйти") {
             @Override
             public int key() {
                 return EXIT;
@@ -80,9 +82,9 @@ public class MenuTracker {
             public void execute(Input input, Tracker tracker) {
 
             }
-        };
+        });
 
-        this.actions[position++] = new BaseAction("Добавить заявку") {
+        this.actions.add(position++, new BaseAction("Добавить заявку") {
             @Override
             public int key() {
                 return ADDITEM;
@@ -95,9 +97,9 @@ public class MenuTracker {
                 tracker.add(new Item(name, desc, System.currentTimeMillis()));
                 System.out.println("Заявка добавлена");
             }
-        };
+        });
 
-        this.actions[position++] = new BaseAction("Найти заявку по ID") {
+        this.actions.add(position++, new BaseAction("Найти заявку по ID") {
             @Override
             public int key() {
                 return FINDBYID;
@@ -111,8 +113,9 @@ public class MenuTracker {
                 Item result = tracker.findById(input.ask("ID заявки: "));
                 System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
             }
-        };
-        this.actions[position++] = new BaseAction("Найти все заявки") {
+        });
+
+        this.actions.add(position++, new BaseAction("Найти все заявки") {
             @Override
             public int key() {
                 return FINDALL;
@@ -123,15 +126,16 @@ public class MenuTracker {
                 if (tracker.getPosition() == 0) {
                     throw new EmptyTrackerException("В трекере нет заявок");
                 }
-                Item[] allItems = tracker.findAll();
+                ArrayList<Item> allItems = tracker.findAll();
                 for (Item item : allItems) {
                     if (item != null) {
                         System.out.printf("ID: %s Название: %s Описание: %s%n", item.getId(), item.getName(), item.getDescription());
                     }
                 }
             }
-        };
-        this.actions[position++] = new BaseAction("Редактировать заявку") {
+        });
+
+        this.actions.add(position++, new BaseAction("Редактировать заявку") {
             @Override
             public int key() {
                 return EDIT;
@@ -148,8 +152,9 @@ public class MenuTracker {
                 updateInfo.setId(input.ask("ID, для которого выполняем обновление: "));
                 tracker.update(updateInfo);
             }
-        };
-        this.actions[position++] = new BaseAction("Удалить заявку") {
+        });
+
+        this.actions.add(position++, new BaseAction("Удалить заявку") {
             @Override
             public int key() {
                 return DELETE;
@@ -162,8 +167,9 @@ public class MenuTracker {
                 }
                 tracker.delete(tracker.findById(input.ask("ID заявки для удаления: ")));
             }
-        };
-        this.actions[position++] = new BaseAction("Найти заявку по названию") {
+        });
+
+        this.actions.add(position++, new BaseAction("Найти заявку по названию") {
             @Override
             public int key() {
                 return FINDBYNAME;
@@ -177,7 +183,7 @@ public class MenuTracker {
                 Item result = tracker.findByName(input.ask("Название заявки: "));
                 System.out.printf("ID: %s Название: %s Описание: %s Дата создания: %d%n", result.getId(), result.getName(), result.getDescription(), result.getCreate());
             }
-        };
+        });
     }
 
     /**
@@ -186,7 +192,7 @@ public class MenuTracker {
      */
     public void performAction(int key) {
         try {
-            this.actions[key].execute(this.input, this.tracker);
+            this.actions.get(key).execute(this.input, this.tracker);
         } catch (EmptyTrackerException ete) {
             System.out.println(ete.getMessage());
         } catch (NullPointerException npe) {
@@ -209,10 +215,10 @@ public class MenuTracker {
      * Returns possible user answers for menu.
      * @return int array of possible answers
      */
-    public int[] getPossibleMenuRange() {
-        int[] result = new int[TRACKERSIZE];
+    public ArrayList<Integer> getPossibleMenuRange() {
+        ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < TRACKERSIZE; i++) {
-            result[i] = i;
+            result.add(i);
         }
         return result;
     }

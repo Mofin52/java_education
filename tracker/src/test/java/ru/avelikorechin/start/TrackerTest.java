@@ -2,6 +2,11 @@ package ru.avelikorechin.start;
 import ru.avelikorechin.models.Item;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,7 +25,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("firstName", "firstDescription", 1L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
     /**
      * Test tracker find by id with result.
@@ -54,7 +59,9 @@ public class TrackerTest {
         Item item2 = new Item("secondName", "secondDescription", 2L);
         tracker.add(item1);
         tracker.add(item2);
-        Item[] expected = {item1, item2};
+        ArrayList<Item> expected = new ArrayList<>();
+        expected.add(item1);
+        expected.add(item2);
         assertThat(tracker.findAll(), is(expected));
     }
     /**
@@ -67,7 +74,7 @@ public class TrackerTest {
         tracker.add(item1);
         item1.setName("Edited Name");
         tracker.update(item1);
-        assertThat(tracker.findAll()[0].getName(), is("Edited Name"));
+        assertThat(tracker.findAll().get(0).getName(), is("Edited Name"));
     }
     /**
      * Test tracker delete.
@@ -78,7 +85,7 @@ public class TrackerTest {
         Item item1 = new Item("firstName", "firstDescription", 1L);
         tracker.add(item1);
         tracker.delete(item1);
-        assertNull(tracker.findAll()[0]);
+        assertTrue(tracker.findAll().isEmpty());
     }
     /**
      * Test tracker find by name.

@@ -1,5 +1,7 @@
 package ru.avelikorechin.start;
 
+import java.util.ArrayList;
+
 /**
  * Tracker start class.
  * @author Alexander Velikorechin
@@ -28,7 +30,7 @@ public class StartUI {
         Tracker tracker = this.linkToTracker;
         MenuTracker menu = new MenuTracker(this.input, tracker);
         menu.fillActions();
-        int[] range = menu.getPossibleMenuRange();
+        ArrayList<Integer> range = menu.getPossibleMenuRange();
         int answer;
         do {
             menu.show();

@@ -1,6 +1,7 @@
 package ru.avelikorechin.start;
 import ru.avelikorechin.models.Item;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -15,13 +16,9 @@ public class Tracker {
      */
     private int position = 0;
     /**
-     * Max length of tracker.
-     */
-    private final int size = 100;
-    /**
      * Item storage of max length.
      */
-    private Item[] items = new Item[size];
+    private ArrayList<Item> items = new ArrayList<>();
     /**
      * Input type for tracker.
      */
@@ -48,7 +45,7 @@ public class Tracker {
      */
     public Item add(Item newItem) {
         newItem.setId(this.generateID());
-        this.items[position++] = newItem;
+        this.items.add(position++, newItem);
         return newItem;
     }
 
@@ -72,14 +69,13 @@ public class Tracker {
      * Method to show all the elements of the tracker.
      * @return Array of already added items.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        int j = 0;
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i] == null) {
+    public ArrayList<Item> findAll() {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item item : this.items) {
+            if (item == null) {
                 continue;
             } else {
-                result[j++] = this.items[i];
+                result.add(item);
             }
         }
         return result;
@@ -110,8 +106,8 @@ public class Tracker {
     public void delete(Item itemToDelete) {
         String itemIdToDelete = itemToDelete.getId();
         for (int i = 0; i < this.position; i++) {
-            if (this.items[i] != null && this.items[i].getId().equals(itemIdToDelete)) {
-                this.items[i] = null;
+            if (this.items.get(i) != null && this.items.get(i).getId().equals(itemIdToDelete)) {
+                this.items.remove(i);
                 break;
             }
         }

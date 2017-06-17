@@ -1,5 +1,7 @@
 package ru.avelikorechin.start;
 
+import java.util.ArrayList;
+
 /**
  * Class for automatic user input.
  * @author Alexander Velikorechin
@@ -36,7 +38,7 @@ public class StubInput implements Input {
      * @param range to validate answer
      * @return answer of user
      */
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exists = false;
         for (int value : range) {

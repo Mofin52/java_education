@@ -1,5 +1,7 @@
 package ru.avelikorechin.start;
 
+import java.util.ArrayList;
+
 /**
  * Input interface.
  * @author Alexander Velikorechin
@@ -19,7 +21,7 @@ public interface Input {
      * @param range to validate answer
      * @return answer of user
      */
-    int ask(String question, int[] range);
+    int ask(String question, ArrayList<Integer> range);
     /**
      * Method shows menu for input.
      * @return input from console

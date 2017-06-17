@@ -68,7 +68,7 @@ public class StartUITest {
         StartUI ui = setTestUp(new String[] {"1", "Test1", "Test2", "0"});
         ui.init();
         final int expectedLength = 1;
-        assertThat(ui.getLinkToTracker().findAll().length, is(expectedLength));
+        assertThat(ui.getLinkToTracker().findAll().size(), is(expectedLength));
     }
 
     /**
@@ -161,7 +161,7 @@ public class StartUITest {
         ui.getLinkToTracker().add(new Item("Test1", "Test2", CUSTOMCREATE));
         ui.getLinkToTracker().add(new Item("Test3", "Test4", CUSTOMCREATE));
         final int expected = 2;
-        assertThat(ui.getLinkToTracker().findAll().length, is(expected));
+        assertThat(ui.getLinkToTracker().findAll().size(), is(expected));
     }
 
     /**
@@ -259,7 +259,7 @@ public class StartUITest {
 
     /**
      * Method creates everything we need for tests.
-     * @param answers what actions will be made by StupInput class
+     * @param answers what actions will be made by StubInput class
      * @return ui set to make tests
      */
     private StartUI setTestUp(String[] answers) {

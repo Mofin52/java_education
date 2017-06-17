@@ -1,6 +1,8 @@
 package ru.avelikorechin.start;
 
 
+import java.util.ArrayList;
+
 /**
  * Class to validate user input.
  * @author Alexander Velikorechin
@@ -14,7 +16,7 @@ public class ValidateInput extends ConsoleInput {
      * @return answer of user
     */
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         boolean invalid = true;
         int value = -1;
         do {
