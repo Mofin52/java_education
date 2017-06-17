@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -60,6 +62,27 @@ public class ConvertListTest {
         assertThat(converter.toArray(prepareList(size), rowsInGoalArray), is(goalArrayWithZeros));
     }
 
+    /**
+     * Test convert list of many arrays to single row list.
+     */
+    @Test
+    public void whenConvertListOfThreeDifferentSizesArraysThenReturnsCorrectList() {
+        ConvertList converter = new ConvertList();
+        final int[] firstMember = {1, 2, 3};
+        final int[] secondMember = {4, 5};
+        final int[] thirdMember = {6};
+        final Integer[] goalArray = {1, 2, 3, 4, 5, 6};
+        LinkedList<int[]> basic = new LinkedList<>();
+        final LinkedList<Integer> result = new LinkedList<Integer>();
+        result.addAll(Arrays.asList(goalArray));
+
+        basic.add(firstMember);
+        basic.add(secondMember);
+        basic.add(thirdMember);
+
+        assertThat(converter.convert(basic), is(result));
+
+    }
 
     /**
      * Method to prepare lists of 1's for tests.

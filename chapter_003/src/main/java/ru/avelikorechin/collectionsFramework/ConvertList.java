@@ -2,6 +2,7 @@ package ru.avelikorechin.collectionsFramework;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,6 +42,21 @@ public class ConvertList {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < lines; j++) {
                 result[i][j] = iter.hasNext() ? iter.next() : 0;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Converts list of int arrays to one list.
+     * @param list list of int arrays
+     * @return linked list of numbers
+     */
+    public List<Integer> convert(List<int[]> list) {
+        LinkedList<Integer> result = new LinkedList<Integer>();
+        for (int[] item : list) {
+            for (int number : item) {
+                result.add(number);
             }
         }
         return result;
