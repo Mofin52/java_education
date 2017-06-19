@@ -1,9 +1,6 @@
 package ru.avelikorechin.collectionsFramework;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class to convert list to array and array to list.
@@ -54,11 +51,11 @@ public class ConvertList {
      */
     public List<Integer> convert(List<int[]> list) {
         LinkedList<Integer> result = new LinkedList<Integer>();
-        for (int[] item : list) {
-            for (int number : item) {
-                result.add(number);
+        list.forEach((arr) -> {
+            for (int num : arr) {
+                result.add(num);
             }
-        }
+        });
         return result;
     }
 }
