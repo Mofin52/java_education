@@ -98,4 +98,34 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
+
+    /**
+     * Overriding of equals to compare items via ID and NAME.
+     * @param o Object(Item) to compare
+     * @return true if equals, false if not
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        if (name != null ? name.equals(item.name) : item.name == null) {
+            return true;
+        } else {
+            return id != null ? id.equals(item.id) : item.id == null;
+        }
+    }
+
+    /**
+     * Overriding of hashCode method to compare items via ID and NAME.
+     * @return hashCode of Item object
+     */
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
+    }
 }

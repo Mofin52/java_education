@@ -16,7 +16,7 @@ public class Tracker {
      */
     private int position = 0;
     /**
-     * Item storage of max length.
+     * Item storage with dynamic size.
      */
     private ArrayList<Item> items = new ArrayList<>();
     /**
