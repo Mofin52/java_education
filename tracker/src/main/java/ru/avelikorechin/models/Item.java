@@ -100,32 +100,30 @@ public class Item {
     }
 
     /**
-     * Overriding of equals to compare items via ID and NAME.
-     * @param o Object(Item) to compare
-     * @return true if equals, false if not
+     * Equals method to compare Items via id.
+     * @param o object to compare
+     * @return are items equals or not
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Item item = (Item) o;
 
-        if (name != null ? name.equals(item.name) : item.name == null) {
-            return true;
-        } else {
-            return id != null ? id.equals(item.id) : item.id == null;
-        }
+        return id.equals(item.id);
     }
 
     /**
-     * Overriding of hashCode method to compare items via ID and NAME.
-     * @return hashCode of Item object
+     * HashCode for equals method.
+     * @return integer hashCode
      */
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        return result;
+        return id.hashCode();
     }
 }

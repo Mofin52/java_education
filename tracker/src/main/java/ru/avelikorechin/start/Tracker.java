@@ -3,6 +3,7 @@ import ru.avelikorechin.models.Item;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Tracker for items.
@@ -16,7 +17,7 @@ public class Tracker {
      */
     private int position = 0;
     /**
-     * Item storage with dynamic size.
+     * Item storage of max length.
      */
     private ArrayList<Item> items = new ArrayList<>();
     /**
@@ -55,14 +56,9 @@ public class Tracker {
      * @return item with given id or null if nothing found
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+        Item result = new Item("something", "new", 0L);
+        result.setId(id);
+        return items.contains(result) ? items.get(items.indexOf(result)) : null;
     }
 
     /**
@@ -71,13 +67,8 @@ public class Tracker {
      */
     public ArrayList<Item> findAll() {
         ArrayList<Item> result = new ArrayList<>();
-        for (Item item : this.items) {
-            if (item == null) {
-                continue;
-            } else {
-                result.add(item);
-            }
-        }
+        result.addAll(this.items);
+        result.removeIf(Predicate.isEqual(null));
         return result;
     }
 
@@ -86,17 +77,11 @@ public class Tracker {
      * @param updatedItem to add to tracker
      */
     public void update(Item updatedItem) {
-        String itemID = updatedItem.getId();
-        boolean noSuchElement = true;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(itemID)) {
-                item.setName(updatedItem.getName());
-                item.setDescription(updatedItem.getDescription());
-                noSuchElement = false;
-                break;
-            }
-        }
-        if (noSuchElement) {
+        Item goalItem = this.items.contains(updatedItem) ? this.items.get(this.items.indexOf(updatedItem)) : null;
+        if (goalItem.getClass() != null) {
+            goalItem.setName(updatedItem.getName());
+            goalItem.setDescription(updatedItem.getDescription());
+        } else {
             throw new NullPointerException("Такой заявки не существует");
         }
     }
@@ -104,28 +89,16 @@ public class Tracker {
      * @param itemToDelete is item to be deleted
      */
     public void delete(Item itemToDelete) {
-        String itemIdToDelete = itemToDelete.getId();
-        for (int i = 0; i < this.position; i++) {
-            if (this.items.get(i) != null && this.items.get(i).getId().equals(itemIdToDelete)) {
-                this.items.remove(i);
-                break;
-            }
-        }
+        this.items.remove(this.items.indexOf(itemToDelete));
     }
 
     /** Method finds item by name and returns it.
      * @param nameToFind name of needed object
-     * @return Object with given name
+     * @return Item with given name
      */
     public Item findByName(String nameToFind) {
-        Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getName().equals(nameToFind)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+        Object[] searchRes = this.items.stream().filter(item -> item.getName() == nameToFind).toArray();
+        return searchRes.length > 0 ? (Item) searchRes[0] : null;
     }
 
     /**
