@@ -47,7 +47,8 @@ public class SortUser {
         input.sort(new Comparator<User>() {
             @Override
             public int compare(User user, User t1) {
-                return user.getName().equals(t1.getName()) ? user.getAge() - t1.getAge() : user.getName().compareTo(t1.getName());
+                int namesEquality = user.getName().compareTo(t1.getName());
+                return namesEquality == 0 ? user.getAge() - t1.getAge() : namesEquality;
             }
         });
         return input;
